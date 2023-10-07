@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "./redux/product/action";
+import fetchApi from "./api/api";
 
 function App() {
+  const data = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchApi({ url: "photos", method: "GET", query: "dog" })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {});
+    console.log("@@@@DATA", data);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>App First </h1>
     </div>
   );
 }
